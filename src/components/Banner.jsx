@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { ImPlay2 as PlayIcon } from "react-icons/im";
+import { RiMenu2Fill as MenuIcon } from "react-icons/ri";
+
 const Banner = () => {
   return (
     <section className="banner ">
@@ -8,16 +10,17 @@ const Banner = () => {
           <p className="logo text-4xl ">
             <span className="text-red-300">Tollyjoy</span> Inventory
           </p>
-          <nav>
-            <ul className="flex gap-4 text-xl">
+          <nav style={{ zIndex: 120 }}>
+            <ul className="absolute left-0 top-[96px]  w-full md:flex md:static gap-4 text-xl">
               <Link to="/">
-                <li>Home</li>
+                <li className="text-center">Home</li>
               </Link>
-              <li>About</li>
-              <li>Items</li>
-              <li>Login</li>
+              <li className="text-center">About</li>
+              <li className="text-center">Items</li>
+              <li className="text-center">Login</li>
             </ul>
           </nav>
+          <MenuIcon className=" md:hidden text-2xl cursor-pointer" />
         </div>
       </header>
 

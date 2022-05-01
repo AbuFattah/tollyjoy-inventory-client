@@ -32,3 +32,12 @@
   );
   z-index: -1;
 }
+nav ul {
+  padding: 50px;
+  background: rgb(85, 53, 222);
+  background: linear-gradient(
+    129deg,
+    rgba(85, 53, 222, 1) 0%,
+    rgb(131, 59, 231) 100%
+  );
+}
