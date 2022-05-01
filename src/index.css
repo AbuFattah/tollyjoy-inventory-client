@@ -3,6 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .bg-gradient {
+    /* background: rgb(85, 53, 222);
+    background: linear-gradient(
+      129deg,
+      rgba(85, 53, 222, 1) 0%,
+      rgba(130, 59, 231, 0.8043418050814075) 100%
+    ); */
+  }
+}
+
 @layer components {
   .my-container {
     @apply container mx-auto p-4 max-w-[1100px];
@@ -32,12 +43,15 @@
   );
   z-index: -1;
 }
-nav ul {
-  padding: 50px;
-  background: rgb(85, 53, 222);
-  background: linear-gradient(
-    129deg,
-    rgba(85, 53, 222, 1) 0%,
-    rgb(131, 59, 231) 100%
-  );
+
+@media (max-width: 768px) {
+  nav ul {
+    padding: 50px;
+    background: rgb(85, 53, 222);
+    background: linear-gradient(
+      129deg,
+      rgba(85, 53, 222, 1) 0%,
+      rgba(99, 28, 199, 0.904) 100%
+    );
+  }
 }
