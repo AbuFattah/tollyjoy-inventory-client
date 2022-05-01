@@ -10,13 +10,13 @@ const SignUp = () => {
   return (
     <section className="welcome-area">
       <Header />
-      <div className="my-container h-full mt-10 md:mt-0">
-        <div className="my-container h-full flex flex-col md:flex-row  items-center gap-20 md:gap-40 ">
+      <div className="my-container  h-full flex items-center justify-center pt-40 md:pt-0">
+        <div className="my-container  flex flex-col md:flex-row  items-center gap-20 md:gap-40 ">
           <div
             className="max-w-[600px] w-full text-white"
             style={{ zIndex: 100 }}
           >
-            <h1 className="text-7xl font-semibold text-white  mb-10">
+            <h1 className="text-5xl md:text-7xl font-semibold  text-white  mb-10">
               Create new account
             </h1>
             <p className="text-lg">
