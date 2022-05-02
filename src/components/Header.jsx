@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { RiMenu2Fill as MenuIcon } from "react-icons/ri";
 import { AiOutlineClose as CloseIcon } from "react-icons/ai";
+import { auth } from "../firebase.config";
+import { signOut } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 const Header = ({ classes }) => {
+  const [user, loading, error] = useAuthState(auth);
   const [show, setShow] = useState(false);
   const toggleShow = () => {
     setShow((prevState) => !prevState);
   };
+
   return (
     <header
       className={`${classes} absolute  top-0 left-0 w-full shadow-sm font-nunito py-3`}
@@ -26,9 +31,15 @@ const Header = ({ classes }) => {
             </Link>
             <li className="text-center">About</li>
             <li className="text-center">Items</li>
-            <Link to="/login">
-              <li className="text-center">Login</li>
-            </Link>
+            {user ? (
+              <Link to="/login">
+                <li className="text-center">Login</li>
+              </Link>
+            ) : (
+              <Link to="/" onClick={signOut}>
+                <li className="text-center">{user.displayName}</li>
+              </Link>
+            )}
             <CloseIcon
               onClick={toggleShow}
               className="cursor-pointer md:hidden absolute top-3 right-3 text-white"
