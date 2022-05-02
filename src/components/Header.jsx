@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { RiMenu2Fill as MenuIcon } from "react-icons/ri";
 import { AiOutlineClose as CloseIcon } from "react-icons/ai";
 import { auth } from "../firebase.config";
@@ -26,19 +26,57 @@ const Header = ({ classes }) => {
               show ? "left-0" : "left-[-100%]"
             } top-[96px] bg-gradient w-full md:flex md:static gap-4 text-xl sm:space-y-4 md:space-y-0 duration-300 ease-in-out items-center`}
           >
-            <Link to="/">
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "text-red-400" : "")}
+            >
               <li className="text-center">Home</li>
-            </Link>
-            <li className="text-center">About</li>
-            <li className="text-center">Items</li>
+            </NavLink>
+            <NavLink
+              to="/blogs"
+              className={({ isActive }) => (isActive ? "text-red-400" : "")}
+            >
+              <li className="text-center">Blogs</li>
+            </NavLink>
+            <NavLink to="/inventory">
+              <li className="text-center">Inventory</li>
+            </NavLink>
+
             {user ? (
-              <Link to="/login">
-                <li className="text-center">Login</li>
-              </Link>
+              <>
+                <NavLink
+                  to="/manage-items"
+                  className={({ isActive }) => (isActive ? "text-red-400" : "")}
+                >
+                  <li className="text-center">Manage Items</li>
+                </NavLink>
+                <NavLink
+                  to="/my-items"
+                  className={({ isActive }) => (isActive ? "text-red-400" : "")}
+                >
+                  <li className="text-center">My Items</li>
+                </NavLink>
+                <NavLink
+                  to="/add-item"
+                  className={({ isActive }) => (isActive ? "text-red-400" : "")}
+                >
+                  <li className="text-center">Add Item</li>
+                </NavLink>
+                <NavLink
+                  to="/"
+                  onClick={() => signOut(auth)}
+                  className={({ isActive }) => (isActive ? "text-red-400" : "")}
+                >
+                  <li className="text-center">Sign Out</li>
+                </NavLink>
+              </>
             ) : (
-              <Link to="/" onClick={signOut}>
-                <li className="text-center">{user.displayName}</li>
-              </Link>
+              <NavLink
+                to="/login"
+                className={({ isActive }) => (isActive ? "text-red-400" : "")}
+              >
+                <li className="text-center">Login</li>
+              </NavLink>
             )}
             <CloseIcon
               onClick={toggleShow}
