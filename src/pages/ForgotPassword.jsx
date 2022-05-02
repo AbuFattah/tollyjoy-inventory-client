@@ -1,23 +1,20 @@
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { MdEmail as EmailIcon } from "react-icons/md";
-import { FaUser as UserIcon } from "react-icons/fa";
-import { AiFillLock as LockIcon } from "react-icons/ai";
-import { FcGoogle as GoogleIcon } from "react-icons/fc";
+
+import loadingIcon from "../assets/svg/loadingIcon.svg";
 import Header from "../components/Header";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../firebase.config";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useUpdateProfile } from "react-firebase-hooks/auth";
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 
 // COMPONENT
 const ForgotPassword = () => {
   const navigate = useNavigate();
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending, error] =
+    useSendPasswordResetEmail(auth);
 
   // FORMIK
   const formik = useFormik({
@@ -27,22 +24,12 @@ const ForgotPassword = () => {
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Required"),
     }),
-    onSubmit: async (values) => {
-      await createUserWithEmailAndPassword(values.email, values.password);
-      await updateProfile({ displayName: formik.values.name });
-      toast.success("Registration successfull");
+    onSubmit: async ({ email }) => {
+      await sendPasswordResetEmail(email);
+      toast.success("Reset Link sent");
+      navigate(-1);
     },
   });
-
-  if (error) {
-    return toast.error("Something went wrong", error);
-  }
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  if (user) {
-    navigate("/");
-  }
 
   return (
     <section className="welcome-area">
@@ -92,10 +79,15 @@ const ForgotPassword = () => {
               ) : null}
 
               <button
-                className="btn btn-md text-left bg-blue cursor-pointer"
+                disabled={sending}
+                className="btn w-full bg-blue"
                 type="submit"
               >
-                Reset Password
+                {sending ? (
+                  <img src={loadingIcon} alt="loading" />
+                ) : (
+                  "Reset Password"
+                )}
               </button>
             </form>
             <Link

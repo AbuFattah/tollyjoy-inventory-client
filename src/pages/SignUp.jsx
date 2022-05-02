@@ -1,8 +1,9 @@
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { MdEmail as EmailIcon } from "react-icons/md";
 import { FaUser as UserIcon } from "react-icons/fa";
 import { AiFillLock as LockIcon } from "react-icons/ai";
 import { FcGoogle as GoogleIcon } from "react-icons/fc";
+import loadingIcon from "../assets/svg/loadingIcon.svg";
 import Header from "../components/Header";
 import React from "react";
 import { useFormik } from "formik";
@@ -54,9 +55,9 @@ const SignUp = () => {
   if (error) {
     return toast.error("Something went wrong", error);
   }
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
   if (user) {
     navigate("/");
   }
@@ -151,7 +152,7 @@ const SignUp = () => {
                 </div>
                 <input
                   required
-                  placeholder="Password"
+                  placeholder="Confirm Password"
                   className="px-4 focus:outline-none w-[250px] shadow flex-auto"
                   type="password"
                   name="confirmPassword"
@@ -167,11 +168,9 @@ const SignUp = () => {
                   {formik.errors.confirmPassword}
                 </div>
               ) : null}
-              <input
-                className="btn w-full bg-blue"
-                type="submit"
-                value="Sign Up"
-              />
+              <button className="btn w-full bg-blue" type="submit">
+                {loading ? <img src={loadingIcon} alt="loading" /> : "Sign up"}
+              </button>
               {/* Line */}
               <div className="line w-full h-[1px] my-5 bg-gray-300"></div>
               <button className="btn w-full flex justify-evenly">

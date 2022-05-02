@@ -3,6 +3,7 @@ import { MdEmail as EmailIcon } from "react-icons/md";
 import { FaUser as UserIcon } from "react-icons/fa";
 import { AiFillLock as LockIcon } from "react-icons/ai";
 import { FcGoogle as GoogleIcon } from "react-icons/fc";
+import loadingIcon from "../assets/svg/loadingIcon.svg";
 import Header from "../components/Header";
 import React from "react";
 import { useFormik } from "formik";
@@ -32,21 +33,16 @@ const SignIn = () => {
         .required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
     }),
-    onSubmit: async ({ email, password }) => {
-      await signInWithEmailAndPassword(email, password);
+    onSubmit: ({ email, password }) => {
+      signInWithEmailAndPassword(email, password);
+      // toast.success("Login Successful");
       // await createUserWithEmailAndPassword(values.email, values.password);
       // await updateProfile({ displayName: formik.values.name });
-      toast.success("Login Successful");
     },
   });
 
-  if (error) {
-    return toast.error("Something went wrong", error);
-  }
-  if (loading) {
-    return <p>Loading...</p>;
-  }
   if (user) {
+    toast.success("Login Successful");
     navigate("/");
   }
 
@@ -78,6 +74,11 @@ const SignIn = () => {
               className="max-w-[600px] bg-white p-5 text-black rounded-lg"
             >
               <h1 className="text-4xl text-center font-semibold ">Sign In</h1>
+              {error && (
+                <p className="text-error text-center my-4">
+                  {"Something went wrong"}
+                </p>
+              )}
               {formik.touched.name && formik.errors.name ? (
                 <div className="text-red-500">{formik.errors.name}</div>
               ) : null}
@@ -126,11 +127,13 @@ const SignIn = () => {
                   {formik.errors.confirmPassword}
                 </div>
               ) : null}
-              <input
+              <button
+                disabled={loading}
                 className="btn w-full bg-blue"
                 type="submit"
-                value="Sign In"
-              />
+              >
+                {loading ? <img src={loadingIcon} alt="loading" /> : "Sign In"}
+              </button>
               <Link
                 to="/forgot-password"
                 className="block text-center text-blue mt-4"
