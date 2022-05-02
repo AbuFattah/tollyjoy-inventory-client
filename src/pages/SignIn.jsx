@@ -14,6 +14,7 @@ import {
   useCreateUserWithEmailAndPassword,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
+import OAuth from "../components/OAuth";
 
 // COMPONENT
 const SignIn = () => {
@@ -142,10 +143,7 @@ const SignIn = () => {
               </Link>
               {/* Line */}
               <div className="line w-full h-[1px] my-5 bg-gray-300"></div>
-              <button className="btn w-full flex justify-evenly">
-                <GoogleIcon className="text-2xl" />
-                <p>Sign In With Google</p>
-              </button>
+              <OAuth text="Sign In with Google" />
               <p className="my-4 text-center">
                 Don't have an account?{" "}
                 <Link className="text-blue mt-4" to="/signup">

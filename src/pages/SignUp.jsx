@@ -12,6 +12,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../firebase.config";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
+import OAuth from "../components/OAuth";
 
 // COMPONENT
 const SignUp = () => {
@@ -173,10 +174,7 @@ const SignUp = () => {
               </button>
               {/* Line */}
               <div className="line w-full h-[1px] my-5 bg-gray-300"></div>
-              <button className="btn w-full flex justify-evenly">
-                <GoogleIcon className="text-2xl" />
-                <p>Sign Up With Google</p>
-              </button>
+              <OAuth text={"Sign Up With Google"} />
               <p className="my-4 text-center">
                 Already have an account?{" "}
                 <Link className="text-blue mt-4" to="/signin">
