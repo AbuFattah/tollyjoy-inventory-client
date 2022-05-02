@@ -18,7 +18,7 @@ const Header = ({ classes }) => {
     >
       <div className="my-container flex justify-between items-center text-white font-semibold">
         <p className="logo text-4xl ">
-          <span className="text-red-300">Tollyjoy</span> Inventory
+          <span className="text-red-400">Tollyjoy</span> Inventory
         </p>
         <nav style={{ zIndex: 120 }}>
           <ul
@@ -62,20 +62,20 @@ const Header = ({ classes }) => {
                 >
                   <li className="text-center">Add Item</li>
                 </NavLink>
-                <NavLink
-                  to="/"
+                <a
+                  href=""
                   onClick={() => signOut(auth)}
                   className={({ isActive }) => (isActive ? "text-red-400" : "")}
                 >
                   <li className="text-center">Sign Out</li>
-                </NavLink>
+                </a>
               </>
             ) : (
               <NavLink
-                to="/login"
+                to="/signin"
                 className={({ isActive }) => (isActive ? "text-red-400" : "")}
               >
-                <li className="text-center">Login</li>
+                <li className="text-center">Sign In</li>
               </NavLink>
             )}
             <CloseIcon

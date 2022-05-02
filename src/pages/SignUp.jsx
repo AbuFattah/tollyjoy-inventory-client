@@ -17,7 +17,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
   // FORMIK
   const formik = useFormik({
@@ -47,7 +47,7 @@ const SignUp = () => {
     onSubmit: async (values) => {
       await createUserWithEmailAndPassword(values.email, values.password);
       await updateProfile({ displayName: formik.values.name });
-      toast.success("Registration successfull");
+      toast.success("Email Verification sent");
     },
   });
 
@@ -180,7 +180,7 @@ const SignUp = () => {
               </button>
               <p className="my-4 text-center">
                 Already have an account?{" "}
-                <Link className="text-blue mt-4" to="/login">
+                <Link className="text-blue mt-4" to="/signin">
                   Sign In
                 </Link>
               </p>

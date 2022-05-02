@@ -1,19 +1,65 @@
-import React from "react";
-import Header from "../components/Header";
-import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import { MdEmail as EmailIcon } from "react-icons/md";
 import { FaUser as UserIcon } from "react-icons/fa";
 import { AiFillLock as LockIcon } from "react-icons/ai";
 import { FcGoogle as GoogleIcon } from "react-icons/fc";
+import Header from "../components/Header";
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { auth } from "../firebase.config";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 
-const Login = () => {
+// COMPONENT
+const SignIn = () => {
+  const navigate = useNavigate();
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  // FORMIK
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      password: Yup.string()
+        .min(6, "Must be atleast 6 characters")
+        .required("Required"),
+      email: Yup.string().email("Invalid email address").required("Required"),
+    }),
+    onSubmit: async ({ email, password }) => {
+      await signInWithEmailAndPassword(email, password);
+      // await createUserWithEmailAndPassword(values.email, values.password);
+      // await updateProfile({ displayName: formik.values.name });
+      toast.success("Login Successful");
+    },
+  });
+
+  if (error) {
+    return toast.error("Something went wrong", error);
+  }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (user) {
+    navigate("/");
+  }
+
   return (
     <section className="welcome-area">
       <Header />
-      <div className="my-container h-full">
-        <div className="my-container h-full flex items-center gap-40">
-          <div className="max-w-[600px] text-white" style={{ zIndex: 100 }}>
-            <h1 className="text-7xl font-semibold text-white  mb-10">
+      <div className="my-container  h-full flex items-center justify-center pt-40 md:pt-0">
+        <div className="my-container  flex flex-col md:flex-row  items-center gap-20 md:gap-40 ">
+          <div
+            className="max-w-[600px] w-full text-white"
+            style={{ zIndex: 100 }}
+          >
+            <h1 className="text-5xl md:text-7xl font-semibold  text-white  mb-10">
               Welcome Back!
             </h1>
             <p className="text-lg">
@@ -22,15 +68,19 @@ const Login = () => {
             </p>
           </div>
           {/* FORM START */}
-          <div>
+          <div className="flex-1">
             <form
+              onSubmit={formik.handleSubmit}
               style={{
                 position: "relative",
                 zIndex: 200,
               }}
-              className=" flex-1 max-w-[600px] bg-white p-5 text-black rounded-lg"
+              className="max-w-[600px] bg-white p-5 text-black rounded-lg"
             >
               <h1 className="text-4xl text-center font-semibold ">Sign In</h1>
+              {formik.touched.name && formik.errors.name ? (
+                <div className="text-red-500">{formik.errors.name}</div>
+              ) : null}
               <div className="form-group flex h-[50px] my-5  rounded-sm ">
                 <div className="input-icon bg-gray-300 flex items-center justify-center px-3 border border-gray-400 ">
                   <EmailIcon className="p-0 text-2xl text-gray-700 " />
@@ -42,8 +92,14 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
                 />
               </div>
+              {formik.touched.email && formik.errors.email ? (
+                <div className="text-red-500">{formik.errors.email}</div>
+              ) : null}
               <div className="form-group flex h-[50px] my-5  rounded-sm ">
                 <div className="input-icon bg-gray-300 flex items-center justify-center px-3 border border-gray-400 ">
                   <LockIcon className="p-0 text-2xl text-gray-700 " />
@@ -55,18 +111,37 @@ const Login = () => {
                   type="password"
                   name="password"
                   id="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
                 />
               </div>
+              {formik.touched.password && formik.errors.password ? (
+                <div className="text-red-500">{formik.errors.password}</div>
+              ) : null}
+
+              {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword ? (
+                <div className="text-red-500">
+                  {formik.errors.confirmPassword}
+                </div>
+              ) : null}
               <input
                 className="btn w-full bg-blue"
                 type="submit"
                 value="Sign In"
               />
+              <Link
+                to="/forgot-password"
+                className="block text-center text-blue mt-4"
+              >
+                Forgot Password?
+              </Link>
               {/* Line */}
               <div className="line w-full h-[1px] my-5 bg-gray-300"></div>
               <button className="btn w-full flex justify-evenly">
                 <GoogleIcon className="text-2xl" />
-                <p>Continue With Google</p>
+                <p>Sign In With Google</p>
               </button>
               <p className="my-4 text-center">
                 Don't have an account?{" "}
@@ -91,4 +166,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;
