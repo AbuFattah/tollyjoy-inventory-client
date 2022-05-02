@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ForgotPassword from "./pages/ForgotPassword";
+import InventoryDetails from "./components/InventoryDetails";
 function App() {
   return (
     <div className="App">
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="inventory/" element={<InventoryDetails />} />
       </Routes>
       <ToastContainer />
     </div>

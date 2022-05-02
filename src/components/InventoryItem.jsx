@@ -1,12 +1,12 @@
 import React from "react";
 
 const InventoryItem = ({
-  details: { price, quantity, description, supplier, image, name },
+  details: { price, quantity, description, supplier, imageUrl, name },
 }) => {
   return (
-    <div className="card w-80 bg-base-100 shadow-xl">
+    <div className="card card-compact w-72 bg-base-100 shadow-xl">
       <figure>
-        <img src={image} alt="product image" />
+        <img src={imageUrl} alt="product image" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
@@ -19,8 +19,8 @@ const InventoryItem = ({
         <p className="font-semibold text-sm">
           <span className="text-gray-500 ">Supplier:</span> {supplier}
         </p>
-        <div className="card-actions justify-end">
-          <button className="btn bg-blue">Manage Stock</button>
+        <div className="">
+          <button className="btn bg-black w-full">Manage Stock</button>
         </div>
       </div>
     </div>
