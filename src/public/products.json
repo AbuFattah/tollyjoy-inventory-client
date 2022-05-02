@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Baby Bib",
+    "price": 200,
+    "description": "Keep your baby clean and dry from accidental spills during feeding time.",
+    "quantity": 20,
+    "supplier": "Tollyjoy",
+    "imageUrl": "https://i.ibb.co/Mfr9qtk/baby-bib.jpg"
+  },
+  {
+    "name": "Baby Cutlery Set",
+    "price": 200,
+    "description": "Specieally designed for babies , so that they can learn to hold cutlery pieces.",
+    "quantity": 20,
+    "supplier": "Tollyjoy",
+    "imageUrl": "https://i.ibb.co/44dR3Hv/baby-cutlery-set.jpg"
+  },
+  {
+    "name": "Baby Napkins",
+    "price": 200,
+    "description": "Napkins is double layered to provide maximum durability and ventilation.",
+    "quantity": 20,
+    "supplier": "Tollyjoy",
+    "imageUrl": "https://i.ibb.co/TT9WZGQ/napkin-liners.jpg"
+  },
+  {
+    "name": "Baby Towel",
+    "price": 200,
+    "description": "High absorbency towel for gentle drying after a refreshing and lovely bath.",
+    "quantity": 20,
+    "supplier": "Tollyjoy",
+    "imageUrl": "https://i.ibb.co/RjdHhT9/baby-towel.jpg"
+  },
+  {
+    "name": "5 piece Feeding Set",
+    "price": 200,
+    "description": "Make your baby's feeding time easier and more enjoyable",
+    "quantity": 20,
+    "supplier": "Tollyjoy",
+    "imageUrl": "https://i.ibb.co/LgVTbKY/feeding-set.jpg"
+  },
+  {
+    "name": "Bottle Warmer",
+    "price": 200,
+    "description": "Revolutionary design warms up baby's bottle and food, keeping them at the desired temperature.",
+    "quantity": 20,
+    "supplier": "Tollyjoy",
+    "imageUrl": "https://i.ibb.co/5jmHwPm/bottle-warmer.jpg"
+  }
+]

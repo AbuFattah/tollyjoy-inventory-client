@@ -19,7 +19,10 @@ const Banner = () => {
             Get Started
           </button>
         </div>
-        <div className="play-button  cursor-pointer" style={{ zIndex: 100 }}>
+        <div
+          className="play-button hidden md:block cursor-pointer"
+          style={{ zIndex: 100 }}
+        >
           <PlayIcon className="text-7xl play-btn" />
         </div>
       </div>
