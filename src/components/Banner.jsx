@@ -5,7 +5,7 @@ import Header from "./Header";
 const Banner = () => {
   return (
     <section className="banner ">
-      <Header classes="" />
+      <Header type="absolute" />
       <div className="my-container h-full flex items-center text-white gap-40">
         <div className="max-w-[600px] " style={{ zIndex: 100 }}>
           <h1 className="text-7xl font-semibold text-white  mb-10">

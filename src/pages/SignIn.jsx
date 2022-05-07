@@ -52,7 +52,7 @@ const SignIn = () => {
 
   return (
     <section className="welcome-area">
-      <Header />
+      <Header type="absolute" />
       <div className="my-container  h-full flex items-center justify-center pt-40 md:pt-0">
         <div className="my-container  flex flex-col md:flex-row  items-center gap-20 md:gap-40 ">
           <div

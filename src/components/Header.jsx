@@ -5,7 +5,7 @@ import { AiOutlineClose as CloseIcon } from "react-icons/ai";
 import { auth } from "../firebase.config";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-const Header = ({ classes }) => {
+const Header = ({ type, className }) => {
   const [user, loading, error] = useAuthState(auth);
   const [show, setShow] = useState(false);
   const toggleShow = () => {
@@ -14,9 +14,11 @@ const Header = ({ classes }) => {
 
   return (
     <header
-      className={`${classes} absolute  top-0 left-0 w-full shadow-sm font-nunito py-3`}
+      className={`${
+        type === "absolute" ? "absolute  top-0 left-0 w-full" : ""
+      }  shadow-sm font-nunito py-3 ${className ? className : "text-white"}`}
     >
-      <div className="my-container flex justify-between items-center text-white font-semibold">
+      <div className="my-container flex justify-between items-center  font-semibold">
         <p className="logo text-4xl ">
           <span className="text-red-400">Tollyjoy</span> Inventory
         </p>
@@ -62,11 +64,7 @@ const Header = ({ classes }) => {
                 >
                   <li className="text-center">Add Item</li>
                 </NavLink>
-                <a
-                  href=""
-                  onClick={() => signOut(auth)}
-                  className={({ isActive }) => (isActive ? "text-red-400" : "")}
-                >
+                <a href="" onClick={() => signOut(auth)}>
                   <li className="text-center">Sign Out</li>
                 </a>
               </>
