@@ -1,6 +1,7 @@
 [
   {
     "name": "Baby Bib",
+    "featured": true,
     "price": 200,
     "description": "Keep your baby clean and dry from accidental spills during feeding time.",
     "quantity": 20,
@@ -9,6 +10,7 @@
   },
   {
     "name": "Baby Cutlery Set",
+    "featured": true,
     "price": 200,
     "description": "Specieally designed for babies , so that they can learn to hold cutlery pieces.",
     "quantity": 20,
@@ -17,6 +19,7 @@
   },
   {
     "name": "Baby Napkins",
+    "featured": true,
     "price": 200,
     "description": "Napkins is double layered to provide maximum durability and ventilation.",
     "quantity": 20,
@@ -25,6 +28,7 @@
   },
   {
     "name": "Baby Towel",
+    "featured": true,
     "price": 200,
     "description": "High absorbency towel for gentle drying after a refreshing and lovely bath.",
     "quantity": 20,
@@ -33,6 +37,7 @@
   },
   {
     "name": "5 piece Feeding Set",
+    "featured": true,
     "price": 200,
     "description": "Make your baby's feeding time easier and more enjoyable",
     "quantity": 20,
@@ -41,6 +46,7 @@
   },
   {
     "name": "Bottle Warmer",
+    "featured": true,
     "price": 200,
     "description": "Revolutionary design warms up baby's bottle and food, keeping them at the desired temperature.",
     "quantity": 20,

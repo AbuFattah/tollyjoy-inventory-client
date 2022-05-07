@@ -14,7 +14,7 @@ function App() {
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="forgot-password" element={<ForgotPassword />}></Route>
-        <Route path="inventory/" element={<InventoryDetails />} />
+        <Route path="inventory/:productId" element={<InventoryDetails />} />
       </Routes>
       <ToastContainer />
     </div>
