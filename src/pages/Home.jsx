@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Banner from "../components/Banner";
 import InventoryItem from "../components/InventoryItem";
 const Home = () => {
@@ -24,6 +25,13 @@ const Home = () => {
               <InventoryItem key={Math.random().toString()} details={product} />
             ))}
           </div>
+
+          <Link
+            to="manage-inventories"
+            className="text-xl font-semibold block mx-auto bg-blue text-white rounded-md p-3 w-[300px] text-center my-10"
+          >
+            Manage Inventories
+          </Link>
         </div>
       </section>
     </>

@@ -32,6 +32,7 @@ const InventoryDetails = () => {
           quantity: prevState.quantity - 1,
         };
       });
+
       toast.success("Product delivered");
     } catch (err) {
       toast.error("Product delivery failed");
@@ -58,6 +59,7 @@ const InventoryDetails = () => {
           quantity: +prevState.quantity + +restockRef.current.value,
         };
       });
+      setShowRestock((prevState) => !prevState);
       toast.success("Stock updated");
     } catch (err) {
       toast.error("stock update failed");
@@ -69,6 +71,10 @@ const InventoryDetails = () => {
       <Header type="static" className={"text-black shadow-lg"} />
       <div>
         <div className="my-container">
+          <h1 className=" text-gray-600 text-4xl text-center my-4">
+            Product Details
+          </h1>
+          <div className="line w-[50px] h-[5px] bg-blue mx-auto my-4 mb-10"></div>
           <div className="flex flex-col md:flex-row  shadow-xl max-w-[1000px] mx-auto rounded-lg">
             <figure
               style={{
@@ -118,6 +124,7 @@ const InventoryDetails = () => {
                       <input
                         ref={restockRef}
                         type="number"
+                        min={1}
                         className=" border-2 p-2 flex-1"
                         placeholder="100"
                         required

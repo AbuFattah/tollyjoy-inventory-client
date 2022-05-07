@@ -28,7 +28,7 @@ const InventoryItem = ({
             }}
             className="btn bg-black w-full"
           >
-            Manage Stock
+            Update Stock
           </button>
         </div>
       </div>
