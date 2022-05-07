@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase.config";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
@@ -17,6 +17,9 @@ import OAuth from "../components/OAuth";
 // COMPONENT
 const SignUp = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+  let path = location.state?.from || "/";
+  console.log(path);
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
@@ -60,7 +63,7 @@ const SignUp = () => {
   //   return <p>Loading...</p>;
   // }
   if (user) {
-    navigate("/");
+    navigate(path, { replace: true });
   }
 
   return (

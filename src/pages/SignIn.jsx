@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase.config";
 import {
   useCreateUserWithEmailAndPassword,
@@ -19,6 +19,9 @@ import OAuth from "../components/OAuth";
 // COMPONENT
 const SignIn = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+  let path = location.state?.from || "/";
+  console.log(path);
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
@@ -44,7 +47,7 @@ const SignIn = () => {
 
   if (user) {
     toast.success("Login Successful");
-    navigate("/");
+    navigate(path, { replace: true });
   }
 
   return (
