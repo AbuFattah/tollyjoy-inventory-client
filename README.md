@@ -11,6 +11,7 @@ Features and Functionality:
 - login with google OAuth
 - Users can add add products and manage , delete and update products
 - dynamic routing
+- JWT token authentication
 
 Tools Used:
 
