@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Header from "./Header";
 
 const InventoryDetails = () => {
+  const navigate = useNavigate();
   const [details, setDetails] = useState({});
   const restockRef = useRef();
   const [showRestock, setShowRestock] = useState(false);
@@ -11,9 +12,18 @@ const InventoryDetails = () => {
   console.log(productId);
   const { description, imageUrl, price, quantity, supplier, name } = details;
   useEffect(() => {
-    fetch(`http://localhost:5000/inventory/${productId}`)
-      .then((res) => res.json())
-      .then((data) => setDetails(data));
+    fetch(`https://agile-anchorage-49002.herokuapp.com/inventory/${productId}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Not found", res.status);
+        } else {
+          return res.json();
+        }
+      })
+      .then((data) => setDetails(data))
+      .catch((error) => {
+        navigate("/not-found", { replace: true });
+      });
   }, []);
 
   const handleDelivered = () => {
@@ -22,10 +32,13 @@ const InventoryDetails = () => {
       return;
     }
     try {
-      fetch(`http://localhost:5000/inventory/${productId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-      });
+      fetch(
+        `https://agile-anchorage-49002.herokuapp.com/inventory/${productId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       setDetails((prevState) => {
         return {
           ...prevState,
@@ -46,13 +59,16 @@ const InventoryDetails = () => {
     //   return;
     // }
     try {
-      fetch(`http://localhost:5000/restock/${productId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          quantity: parseInt(restockRef.current.value),
-        }),
-      });
+      fetch(
+        `https://agile-anchorage-49002.herokuapp.com/restock/${productId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            quantity: parseInt(restockRef.current.value),
+          }),
+        }
+      );
       setDetails((prevState) => {
         return {
           ...prevState,

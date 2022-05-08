@@ -17,9 +17,12 @@ const ManageInventories = () => {
   };
   const handleDeleteItem = async (id) => {
     try {
-      await fetch(`http://localhost:5000/products/${id}`, {
-        method: "DELETE",
-      });
+      await fetch(
+        `https://agile-anchorage-49002.herokuapp.com/products/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       setModalIsOpen(false);
       setProducts((prevState) =>
         prevState.filter((product) => product._id !== id)
@@ -31,7 +34,7 @@ const ManageInventories = () => {
   };
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/products")
+    fetch("https://agile-anchorage-49002.herokuapp.com/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

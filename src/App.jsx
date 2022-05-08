@@ -44,9 +44,6 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="forgot-password" element={<ForgotPassword />}></Route>
-        <Route path="not-found" element={<NotFound />}></Route>
-        <Route path="blogs" element={<Blogs />}></Route>
         <Route
           path="inventory/:productId"
           element={
@@ -55,6 +52,10 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route path="forgot-password" element={<ForgotPassword />}></Route>
+        <Route path="not-found" element={<NotFound />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
+        <Route path="blogs" element={<Blogs />}></Route>
       </Routes>
       <Footer />
       <ToastContainer />

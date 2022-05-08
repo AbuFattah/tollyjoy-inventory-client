@@ -10,7 +10,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/featuredProducts")
+    fetch("https://agile-anchorage-49002.herokuapp.com/featuredProducts")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

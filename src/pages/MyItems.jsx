@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase.config";
+import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Header from "../components/Header";
 import Loading from "../components/Loading";
 import TableItem from "../components/TableItem";
-import { auth } from "../firebase.config";
 const MyItems = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, userLoading, error] = useAuthState(auth);
+  const [loading, setLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [products, setProducts] = useState([]);
 
@@ -20,9 +22,12 @@ const MyItems = () => {
   };
   const handleDeleteItem = async (id) => {
     try {
-      await fetch(`http://localhost:5000/products/${id}`, {
-        method: "DELETE",
-      });
+      await fetch(
+        `https://agile-anchorage-49002.herokuapp.com/products/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       setModalIsOpen(false);
       setProducts((prevState) =>
         prevState.filter((product) => product._id !== id)
@@ -33,14 +38,34 @@ const MyItems = () => {
     }
   };
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${user.email}`)
-      .then((res) => res.json())
+    setLoading(true);
+    fetch(
+      `https://agile-anchorage-49002.herokuapp.com/products/${user.email}`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
+      .then((res) => {
+        if (res.status === 403 || res.status === 401) {
+          throw new Error(`Request failed with status ${res.status}`);
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => {
+        setLoading(false);
         setProducts(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        signOut(auth);
       });
-  }, [user]);
+  }, []);
 
-  if (loading) {
+  if (userLoading || loading) {
     return <Loading />;
   }
 

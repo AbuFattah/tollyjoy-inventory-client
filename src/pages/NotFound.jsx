@@ -6,7 +6,12 @@ const NotFound = () => {
   return (
     <>
       <Header type="static" className={"text-black shadow-lg"} />
-      <div className="my-container">
+      <div
+        style={{
+          minHeight: "calc(100vh - 96px - 224px)",
+        }}
+        className="my-container"
+      >
         <div className="flex gap-5">
           <img
             width="200px"

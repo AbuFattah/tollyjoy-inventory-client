@@ -40,16 +40,19 @@ const AddNewItem = () => {
 
     onSubmit: async (values) => {
       try {
-        await fetch("http://localhost:5000/inventories/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...values,
-            email: user.email,
-          }),
-        });
+        await fetch(
+          "https://agile-anchorage-49002.herokuapp.com/inventories/add",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...values,
+              email: user.email,
+            }),
+          }
+        );
         toast.success("Item added successfully");
         navigate("/manage-inventories");
       } catch (err) {

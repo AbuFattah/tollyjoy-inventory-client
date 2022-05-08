@@ -1,7 +1,6 @@
 [
   {
     "name": "Baby Bib",
-    "featured": true,
     "price": 200,
     "description": "Keep your baby clean and dry from accidental spills during feeding time.",
     "quantity": 20,
@@ -10,7 +9,6 @@
   },
   {
     "name": "Baby Cutlery Set",
-    "featured": true,
     "price": 200,
     "description": "Specieally designed for babies , so that they can learn to hold cutlery pieces.",
     "quantity": 20,
@@ -19,7 +17,6 @@
   },
   {
     "name": "Baby Napkins",
-    "featured": true,
     "price": 200,
     "description": "Napkins is double layered to provide maximum durability and ventilation.",
     "quantity": 20,
@@ -28,7 +25,6 @@
   },
   {
     "name": "Baby Towel",
-    "featured": true,
     "price": 200,
     "description": "High absorbency towel for gentle drying after a refreshing and lovely bath.",
     "quantity": 20,
@@ -37,7 +33,6 @@
   },
   {
     "name": "5 piece Feeding Set",
-    "featured": true,
     "price": 200,
     "description": "Make your baby's feeding time easier and more enjoyable",
     "quantity": 20,
@@ -46,11 +41,50 @@
   },
   {
     "name": "Bottle Warmer",
-    "featured": true,
     "price": 200,
     "description": "Revolutionary design warms up baby's bottle and food, keeping them at the desired temperature.",
     "quantity": 20,
     "supplier": "Tollyjoy",
     "imageUrl": "https://i.ibb.co/5jmHwPm/bottle-warmer.jpg"
+  },
+  {
+    "name": "DR.P Diaper",
+    "price": 200,
+    "description": "With over 60 years of experience TENA is the No 1 adult incontinence brand globally.",
+    "quantity": 20,
+    "supplier": "DR.P",
+    "imageUrl": "https://i.ibb.co/Bs4jVTG/drp-diapers.jpg"
+  },
+  {
+    "name": "EQ Baby Diaper",
+    "price": 200,
+    "description": "For leak protection even during active moments with the Japanese-technology.",
+    "quantity": 20,
+    "supplier": "EQ",
+    "imageUrl": "https://i.ibb.co/Yd6sDnb/eq-baby-diapers.jpg"
+  },
+  {
+    "name": "Johnsons Baby oil",
+    "price": 200,
+    "description": "For leak protection even during active moments with the Japanese-technology.",
+    "quantity": 20,
+    "supplier": "Johnsons",
+    "imageUrl": "https://i.ibb.co/FzkHksm/johnsons-oil.jpg"
+  },
+  {
+    "name": "Tollyjoy Mosquito Net",
+    "price": 200,
+    "description": "For leak protection even during active moments with the Japanese-technology.",
+    "quantity": 20,
+    "supplier": "EQ",
+    "imageUrl": "https://i.ibb.co/RNsxBcD/tollyjoy-mosquito-net.jpg"
+  },
+  {
+    "name": "Tollyjoy Baby Cotton sheet",
+    "price": 200,
+    "description": "For leak protection even during active moments with the Japanese-technology.",
+    "quantity": 20,
+    "supplier": "EQ",
+    "imageUrl": "https://i.ibb.co/M2Mhqkh/tollyjoy-cotton-sheet.jpg"
   }
 ]

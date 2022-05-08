@@ -22,7 +22,6 @@ const SignIn = () => {
   const navigate = useNavigate();
   let location = useLocation();
   let path = location.state?.from || "/";
-  console.log(path);
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
@@ -40,11 +39,14 @@ const SignIn = () => {
     }),
     onSubmit: async ({ email, password }) => {
       await signInWithEmailAndPassword(email, password);
-      const data = await fetch("http://localhost:5000/createToken", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      }).then((res) => res.json());
+      const data = await fetch(
+        "https://agile-anchorage-49002.herokuapp.com/createToken",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      ).then((res) => res.json());
 
       console.log(data.accessToken);
       localStorage.setItem("accessToken", data.accessToken);
