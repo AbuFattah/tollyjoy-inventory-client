@@ -8,6 +8,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import InventoryDetails from "./components/InventoryDetails";
 import RequireAuth from "./components/RequireAuth";
 import ManageInventories from "./pages/ManageInventories";
+import AddNewItem from "./pages/AddNewItem";
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/signin" element={<SignIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/add-new-item" element={<AddNewItem />}></Route>
         <Route path="forgot-password" element={<ForgotPassword />}></Route>
         <Route
           path="manage-inventories"

@@ -168,6 +168,14 @@ const InventoryDetails = () => {
               </div>
             </div>
           </div>
+          <div className="text-center">
+            <Link
+              to={"/add-new-item"}
+              className=" text-lg font-semibold btn btn-link mt-5"
+            >
+              Add New Item
+            </Link>
+          </div>
         </div>
       </div>
     </>

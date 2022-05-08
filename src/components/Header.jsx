@@ -40,14 +40,14 @@ const Header = ({ type, className }) => {
             >
               <li className="text-center">Blogs</li>
             </NavLink>
-            <NavLink to="/inventory">
+            {/* <NavLink to="/inventory">
               <li className="text-center">Inventory</li>
-            </NavLink>
+            </NavLink> */}
 
             {user ? (
               <>
                 <NavLink
-                  to="/manage-items"
+                  to="/manage-inventories"
                   className={({ isActive }) => (isActive ? "text-red-400" : "")}
                 >
                   <li className="text-center">Manage Items</li>
@@ -59,7 +59,7 @@ const Header = ({ type, className }) => {
                   <li className="text-center">My Items</li>
                 </NavLink>
                 <NavLink
-                  to="/add-item"
+                  to="/add-new-item"
                   className={({ isActive }) => (isActive ? "text-red-400" : "")}
                 >
                   <li className="text-center">Add Item</li>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Header from "../components/Header";
 import TableItem from "../components/TableItem";
@@ -39,7 +40,15 @@ const ManageInventories = () => {
     <>
       <Header type="static" className={"text-black shadow-lg"} />
       <div className="my-container">
-        <h1 className="text-lg my-2 mb-5">Manage inventories</h1>
+        <h1 className="text-lg uppercase font-semibold mt-2  text-center">
+          Manage inventories
+        </h1>
+        <div className="line w-[50px] h-[3px] bg-blue mx-auto my-2"></div>
+        <div className="text-right">
+          <Link to={"/add-new-item"} className="btn btn-sm  my-4">
+            Add New Item
+          </Link>
+        </div>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 ">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
