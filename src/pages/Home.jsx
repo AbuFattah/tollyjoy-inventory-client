@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Modal from "../assets/Modal";
 import Banner from "../components/Banner";
 import InventoryItem from "../components/InventoryItem";
 const Home = () => {

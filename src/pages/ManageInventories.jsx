@@ -1,9 +1,32 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Header from "../components/Header";
-import bibImg from "../assets/images/products/baby-bib.jpg";
 import TableItem from "../components/TableItem";
 const ManageInventories = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [products, setProducts] = useState([]);
+
+  const handleModalClose = () => {
+    setModalIsOpen(false);
+  };
+  const handleModalOpen = () => {
+    console.log("inside modal open");
+    setModalIsOpen(true);
+  };
+  const handleDeleteItem = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/products/${id}`, {
+        method: "DELETE",
+      });
+      setModalIsOpen(false);
+      setProducts((prevState) =>
+        prevState.filter((product) => product._id !== id)
+      );
+      toast.success("Removed item successfully");
+    } catch (err) {
+      toast.error("Removed item successfully");
+    }
+  };
   useEffect(() => {
     fetch("http://localhost:5000/products")
       .then((res) => res.json())
@@ -40,7 +63,14 @@ const ManageInventories = () => {
             </thead>
             <tbody>
               {products.map((product) => (
-                <TableItem product={product} key={product._id} />
+                <TableItem
+                  onModalOpen={handleModalOpen}
+                  onModalClose={handleModalClose}
+                  onDeleteItem={handleDeleteItem}
+                  modalIsOpen={modalIsOpen}
+                  product={product}
+                  key={product._id}
+                />
               ))}
             </tbody>
           </table>
