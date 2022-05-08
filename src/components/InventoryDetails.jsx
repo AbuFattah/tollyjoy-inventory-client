@@ -170,10 +170,10 @@ const InventoryDetails = () => {
           </div>
           <div className="text-center">
             <Link
-              to={"/add-new-item"}
+              to={"/manage-inventories"}
               className=" text-lg font-semibold btn btn-link mt-5"
             >
-              Add New Item
+              Manage Inventories
             </Link>
           </div>
         </div>

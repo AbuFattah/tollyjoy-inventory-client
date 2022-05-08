@@ -1,6 +1,7 @@
 import { ImPlay2 as PlayIcon } from "react-icons/im";
 import { useState } from "react";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -15,9 +16,12 @@ const Banner = () => {
             With our state of the art inventory management system for baby
             products, you don't have worry about your stock anymore.
           </p>
-          <button className="btn bg-transparent border border-white mt-5">
+          <Link
+            to={"/manage-inventories"}
+            className="btn bg-transparent border border-white mt-5"
+          >
             Get Started
-          </button>
+          </Link>
         </div>
         <div
           className="play-button hidden md:block cursor-pointer"

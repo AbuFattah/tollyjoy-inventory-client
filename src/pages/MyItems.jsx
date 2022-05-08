@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Header from "../components/Header";
 import Loading from "../components/Loading";
 import TableItem from "../components/TableItem";
-const ManageInventories = () => {
+import { auth } from "../firebase.config";
+const MyItems = () => {
+  const [user, loading, error] = useAuthState(auth);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+
   const handleModalClose = () => {
     setModalIsOpen(false);
   };
@@ -30,14 +33,12 @@ const ManageInventories = () => {
     }
   };
   useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:5000/products")
+    fetch(`http://localhost:5000/products/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-        setLoading(false);
       });
-  }, []);
+  }, [user]);
 
   if (loading) {
     return <Loading />;
@@ -53,7 +54,7 @@ const ManageInventories = () => {
         className="my-container"
       >
         <h1 className="text-lg uppercase font-semibold mt-2  text-center">
-          Manage inventories
+          My Items
         </h1>
         <div className="line w-[50px] h-[3px] bg-blue mx-auto my-2"></div>
         <div className="text-right">
@@ -101,4 +102,4 @@ const ManageInventories = () => {
   );
 };
 
-export default ManageInventories;
+export default MyItems;

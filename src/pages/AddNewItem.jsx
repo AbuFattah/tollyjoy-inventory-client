@@ -2,7 +2,14 @@ import React from "react";
 import Header from "../components/Header";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
+import { auth } from "../firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import Loading from "../components/Loading";
 const AddNewItem = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -10,11 +17,15 @@ const AddNewItem = () => {
       price: "",
       quantity: "",
       imageUrl: "",
+      description: "",
     },
     validationSchema: Yup.object({
       name: Yup.string()
         .max(20, "Must be 20 characters or less")
         .required("Item Name required"),
+      description: Yup.string()
+        .max(80, "Must be 80 characters or less")
+        .required("Description required"),
       supplier: Yup.string()
         .max(20, "Must be 20 characters or less")
         .required("Supplier required"),
@@ -24,21 +35,46 @@ const AddNewItem = () => {
       quantity: Yup.number()
         .min(1, "Quantity cannot be less than 1")
         .required("Quantity required"),
-      imageUrl: Yup.string().matches(/https:\/\/.+\.com/, "Invalid URL"),
+      imageUrl: Yup.string().matches(/https:\/\/.+/, "Invalid URL"),
     }),
 
-    onSubmit: (values) => {},
+    onSubmit: async (values) => {
+      try {
+        await fetch("http://localhost:5000/inventories/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...values,
+            email: user.email,
+          }),
+        });
+        toast.success("Item added successfully");
+        navigate("/manage-inventories");
+      } catch (err) {
+        toast.success("Failed to add item");
+      }
+    },
   });
-  const { name, supplier, quantity, price, imageUrl } = formik.values;
+  // IF USER LOADING..
+  if (loading) {
+    return <Loading />;
+  }
+  const { name, description, supplier, quantity, price, imageUrl } =
+    formik.values;
+  //
   return (
     <>
       <Header type="static" className={"text-black shadow-lg"} />
-      <div className="my-container">
+      <div className="my-container max-w-[400px]">
         <p className="text-center mt-5 text-lg font-semibold uppercase">
           Add New Item
         </p>
         <div className="line w-[50px] h-[3px] bg-blue mx-auto my-2 mb-5"></div>
-
+        <Link to="/" className="text-blue inline-block mb-5">
+          Go Home
+        </Link>
         <form
           onSubmit={formik.handleSubmit}
           className="shadow max-w-[400px] mx-auto p-5"
@@ -63,6 +99,28 @@ const AddNewItem = () => {
               name="name"
               id="name"
               placeholder="EQ baby diaper"
+            />
+          </div>
+          <div>
+            <label
+              className="required block text-lg my-2"
+              htmlFor="name"
+              id="name"
+            >
+              Item Description:
+            </label>
+            {formik.touched.description && formik.errors.description ? (
+              <div className="text-red-500">{formik.errors.description}</div>
+            ) : null}
+            <textarea
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={description}
+              className=" border p-2 px-3 w-full"
+              type="text"
+              name="description"
+              id="description"
+              // placeholder="EQ baby diaper"
             />
           </div>
           <div>

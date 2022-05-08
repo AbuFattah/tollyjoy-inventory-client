@@ -2,15 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "../assets/Modal";
 import Banner from "../components/Banner";
+import Footer from "../components/Footer";
 import InventoryItem from "../components/InventoryItem";
+import Loading from "../components/Loading";
 const Home = () => {
   const [products, setProducts] = useState([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:5000/featuredProducts")
       .then((res) => res.json())
-      .then((data) => setProducts(data));
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      });
   }, []);
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
       <Banner />;

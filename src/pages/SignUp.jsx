@@ -13,6 +13,7 @@ import { auth } from "../firebase.config";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 import OAuth from "../components/OAuth";
+import Loading from "../components/Loading";
 
 // COMPONENT
 const SignUp = () => {
@@ -64,6 +65,9 @@ const SignUp = () => {
   // }
   if (user) {
     navigate(path, { replace: true });
+  }
+  if (loading) {
+    return <Loading />;
   }
 
   return (

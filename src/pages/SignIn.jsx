@@ -15,6 +15,7 @@ import {
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import OAuth from "../components/OAuth";
+import Loading from "../components/Loading";
 
 // COMPONENT
 const SignIn = () => {
@@ -37,17 +38,26 @@ const SignIn = () => {
         .required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
     }),
-    onSubmit: ({ email, password }) => {
-      signInWithEmailAndPassword(email, password);
+    onSubmit: async ({ email, password }) => {
+      await signInWithEmailAndPassword(email, password);
+      const data = await fetch("http://localhost:5000/createToken", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      }).then((res) => res.json());
+
+      console.log(data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
+      toast.success("Login Successful");
+      navigate(path, { replace: true });
       // toast.success("Login Successful");
       // await createUserWithEmailAndPassword(values.email, values.password);
       // await updateProfile({ displayName: formik.values.name });
     },
   });
 
-  if (user) {
-    toast.success("Login Successful");
-    navigate(path, { replace: true });
+  if (loading) {
+    return <Loading />;
   }
 
   return (
@@ -80,7 +90,7 @@ const SignIn = () => {
               <h1 className="text-4xl text-center font-semibold ">Sign In</h1>
               {error && (
                 <p className="text-error text-center my-4">
-                  {"Something went wrong"}
+                  {"Credentials don't match"}
                 </p>
               )}
               {formik.touched.name && formik.errors.name ? (
