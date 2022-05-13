@@ -50,8 +50,6 @@ const SignIn = () => {
 
       console.log(data.accessToken);
       localStorage.setItem("accessToken", data.accessToken);
-      toast.success("Login Successful");
-      navigate(path, { replace: true });
       // toast.success("Login Successful");
       // await createUserWithEmailAndPassword(values.email, values.password);
       // await updateProfile({ displayName: formik.values.name });
@@ -60,6 +58,10 @@ const SignIn = () => {
 
   if (loading) {
     return <Loading />;
+  }
+  if (user) {
+    toast.success("Login Successful");
+    navigate(path, { replace: true });
   }
 
   return (
