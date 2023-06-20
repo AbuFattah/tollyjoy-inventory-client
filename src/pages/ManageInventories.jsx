@@ -18,7 +18,7 @@ const ManageInventories = () => {
   const handleDeleteItem = async (id) => {
     try {
       await fetch(
-        `https://agile-anchorage-49002.herokuapp.com/products/${id}`,
+        `https://tollyjoyinventory-devfattah0.b4a.run//products/${id}`,
         {
           method: "DELETE",
         }
@@ -34,7 +34,7 @@ const ManageInventories = () => {
   };
   useEffect(() => {
     setLoading(true);
-    fetch("https://agile-anchorage-49002.herokuapp.com/products")
+    fetch("https://tollyjoyinventory-devfattah0.b4a.run//products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

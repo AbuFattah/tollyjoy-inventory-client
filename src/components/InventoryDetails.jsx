@@ -12,7 +12,7 @@ const InventoryDetails = () => {
   console.log(productId);
   const { description, imageUrl, price, quantity, supplier, name } = details;
   useEffect(() => {
-    fetch(`https://agile-anchorage-49002.herokuapp.com/inventory/${productId}`)
+    fetch(`https://tollyjoyinventory-devfattah0.b4a.run//inventory/${productId}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Not found", res.status);
@@ -33,7 +33,7 @@ const InventoryDetails = () => {
     }
     try {
       fetch(
-        `https://agile-anchorage-49002.herokuapp.com/inventory/${productId}`,
+        `https://tollyjoyinventory-devfattah0.b4a.run//inventory/${productId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -60,7 +60,7 @@ const InventoryDetails = () => {
     // }
     try {
       fetch(
-        `https://agile-anchorage-49002.herokuapp.com/restock/${productId}`,
+        `https://tollyjoyinventory-devfattah0.b4a.run//restock/${productId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

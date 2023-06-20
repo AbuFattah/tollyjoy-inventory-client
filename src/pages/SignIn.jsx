@@ -40,7 +40,7 @@ const SignIn = () => {
     onSubmit: async ({ email, password }) => {
       await signInWithEmailAndPassword(email, password);
       const data = await fetch(
-        "https://agile-anchorage-49002.herokuapp.com/createToken",
+        "https://tollyjoyinventory-devfattah0.b4a.run//createToken",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

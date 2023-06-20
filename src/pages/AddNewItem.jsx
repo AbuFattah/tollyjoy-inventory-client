@@ -41,7 +41,7 @@ const AddNewItem = () => {
     onSubmit: async (values) => {
       try {
         await fetch(
-          "https://agile-anchorage-49002.herokuapp.com/inventories/add",
+          "https://tollyjoyinventory-devfattah0.b4a.run//inventories/add",
           {
             method: "POST",
             headers: {
